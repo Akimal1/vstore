@@ -83,6 +83,7 @@ const Admin = () => {
           </div>
           <div className={scss.btns}>
             <button type="submit">Create</button>
+            <button type="submit">save</button>
           </div>
         </form>
       </div>
