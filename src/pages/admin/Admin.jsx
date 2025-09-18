@@ -72,6 +72,15 @@ const Admin = () => {
             />
             <span className={scss.label}>Дата выпуска</span>
           </div>
+          <div className={scss.field}>
+            <input
+              //   {...register("category")}
+              className={scss.input}
+              type="text"
+              placeholder=" "
+            />
+            <span className={scss.label}>Дата</span>
+          </div>
           <div className={scss.btns}>
             <button type="submit">Create</button>
           </div>
