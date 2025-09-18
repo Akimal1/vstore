@@ -1,0 +1,46 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  border: none;
+  font-family: Inter;
+}
+.container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+h1 {
+  color: white;
+  font-size: 54px;
+  font-weight: 700;
+}
+h2 {
+  font-size: 45px;
+  font-weight: 600;
+}
+h3 {
+  font-size: 36px;
+  font-weight: 600;
+}
+h4 {
+  font-size: 24px;
+  font-weight: 500;
+}
+
+p,
+span,
+button,
+a {
+  color: white;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+button {
+  padding: 8px 15px;
+  border-radius: 10px;
+}
