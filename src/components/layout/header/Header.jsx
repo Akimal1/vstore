@@ -13,7 +13,7 @@ const Header = () => {
         <div className={scss.maincontainer}>
           <div className={scss.headerTop}>
             <div className={scss.headerLeft}>
-              <p>Главная</p>
+              <p onClick={()=> navigate("/")}>Главная</p>
               <p>О магазине</p>
               <p>Гарантия</p>
               <p>Доставка</p>
