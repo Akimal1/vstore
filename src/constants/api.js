@@ -1,0 +1,1 @@
+export const API = "https://api-crud.elcho.dev/api/v1/20399-cd31e-07a4b/vstore"
