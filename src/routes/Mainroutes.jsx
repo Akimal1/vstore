@@ -3,6 +3,8 @@ import { Route, Routes } from "react-router-dom";
 import Home from "../pages/home/Home";
 import Admin from "../pages/admin/Admin";
 import Register from "../pages/register/Register";
+import UpdatePage from "../pages/update/UpdatePage";
+import Details from "../pages/details/Details";
 
 const MainRoutes = () => {
   const routes = [
@@ -10,6 +12,8 @@ const MainRoutes = () => {
     { link: "*", element: "" },
     { link: "/admin", element: <Admin /> },
     { link: "/register", element: <Register /> },
+    { link: "/update/:id", element: <UpdatePage /> },
+    { link: "/details/:id", element: <Details /> },
   ];
   return (
     <Routes>

@@ -1,36 +1,77 @@
-import React from "react";
-import scss from "./admin.module.scss";
-import { useForm } from "react-hook-form";
+import React, { useEffect } from "react";
+import scss from "../../pages/admin/admin.module.scss";
 import { useProductContext } from "../../context/ProductContext";
+import { useNavigate, useParams } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
-const Admin = () => {
-  const {postProduct} = useProductContext()
-  const { register, handleSubmit, reset, formState } = useForm();
+const UpdatePage = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const { getOneProduct, oneProduct, updateProduct } = useProductContext();
+  const { reset, handleSubmit, register } = useForm();
+
   const onSubmit = async (data) => {
-    await postProduct(data)
-    reset()
+    await updateProduct(id, data);
+    navigate("/");
+    // console.log(data);
   };
+
+  useEffect(() => {
+    getOneProduct(id);
+  }, [id]);
+
+  useEffect(() => {
+    if (oneProduct && Object.keys(oneProduct).length > 0) {
+      reset({
+        name: oneProduct.name,
+        image: oneProduct.image,
+        producer: oneProduct.producer,
+        ram: oneProduct.ram,
+        system: oneProduct.system,
+        cpu: oneProduct.cpu,
+        color: oneProduct.color,
+        date: oneProduct.date,
+        price: oneProduct.price,
+      });
+    }
+  }, [oneProduct]);
+
   return (
     <section className={scss.container}>
       <div className="container">
         <form onSubmit={handleSubmit(onSubmit)} className={scss.mainContainer}>
           <div className={scss.field}>
-            <input {...register("name")} className={scss.input} type="text" placeholder=" " />
+            <input
+              {...register("name")}
+              className={scss.input}
+              type="text"
+              placeholder=" "
+            />
             <span className={scss.label}>Имя</span>
           </div>
-            <div className={scss.field}>
-            <input {...register("image")} className={scss.input} type="text" placeholder=" " />
+          <div className={scss.field}>
+            <input
+              {...register("image")}
+              className={scss.input}
+              type="text"
+              placeholder=" "
+            />
             <span className={scss.label}>image</span>
           </div>
 
           <div className={scss.field}>
-            <input {...register("producer")} className={scss.input} type="text" placeholder=" " />
+            <input
+              {...register("producer")}
+              className={scss.input}
+              type="text"
+              placeholder=" "
+            />
             <span className={scss.label}>Производитель</span>
           </div>
 
           <div className={scss.field}>
             <input
-             {...register("ram")}
+              {...register("ram")}
               className={scss.input}
               type="text"
               placeholder=" "
@@ -57,7 +98,7 @@ const Admin = () => {
           </div>
           <div className={scss.field}>
             <input
-            {...register("color")}
+              {...register("color")}
               className={scss.input}
               type="text"
               placeholder=" "
@@ -74,7 +115,7 @@ const Admin = () => {
             />
             <span className={scss.label}>Дата выпуска</span>
           </div>
-           <div className={scss.field}>
+          <div className={scss.field}>
             <input
               {...register("price")}
               className={scss.input}
@@ -84,7 +125,7 @@ const Admin = () => {
             <span className={scss.label}>цена</span>
           </div>
           <div className={scss.btns}>
-            <button type="submit">Create</button>
+            <button type="submit">Сохранить</button>
           </div>
         </form>
       </div>
@@ -92,4 +133,4 @@ const Admin = () => {
   );
 };
 
-export default Admin;
+export default UpdatePage;

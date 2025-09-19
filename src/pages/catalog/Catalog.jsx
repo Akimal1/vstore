@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import scss from "./catalog.module.scss";
 import { GrBottomCorner } from "react-icons/gr";
+import { useNavigate } from "react-router-dom";
+import { useProductContext } from "../../context/ProductContext";
 
 const Catalog = () => {
+  const navigate = useNavigate()
+   const { setCategory } = useProductContext();
   const minPrice = 9000;
   const maxPrice = 132000;
   const [minValue, setMinValue] = useState(minPrice); // "От"
@@ -15,25 +19,27 @@ const Catalog = () => {
           <div className={scss.phones}>
             <h4>Уточнить раздел</h4>
             <div className={scss.phoneCard}>
-              <p>Apple</p>
+              <p onClick={() => setCategory('ALL')}>ALL</p>
               <hr />
-              <p>Samsung</p>
+              <p onClick={() => setCategory('Apple')}>Apple</p>
               <hr />
-              <p>Honor</p>
+              <p onClick={() => setCategory('Samsung')}>Samsung</p>
               <hr />
-              <p>Xiaomi</p>
+              <p onClick={() => setCategory('Honor')}>Honor</p>
               <hr />
-              <p>Poco</p>
+              <p onClick={() => setCategory('Xiaomi')}>Xiaomi</p>
               <hr />
-              <p>Tecno</p>
+              <p onClick={() => setCategory('Poco')}>Poco</p>
               <hr />
-              <p>Oppo</p>
+              <p onClick={() => setCategory('Tecno')}>Tecno</p>
               <hr />
-              <p>Infinix</p>
+              <p onClick={() => setCategory('Oppo')}>Oppo</p>
               <hr />
-              <p>Vivo</p>
+              <p onClick={() => setCategory('Infinix')}>Infinix</p>
               <hr />
-              <p>RealMe</p>
+              <p onClick={() => setCategory('Vivo')}>Vivo</p>
+              <hr />
+              <p onClick={() => setCategory('RealMe')}>RealMe</p>
               <hr />
             </div>
           </div>
