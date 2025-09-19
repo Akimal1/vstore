@@ -4,7 +4,7 @@ import { useProductContext } from "../../context/ProductContext";
 import { useNavigate, useParams } from "react-router-dom";
 
 const Products = () => {
-  const { products, getProducts, category,deleteProduct, updateProduct } = useProductContext();
+  const { products, getProducts, category,deleteProduct } = useProductContext();
   const navigate = useNavigate()
   useEffect(() => {
     getProducts();
@@ -21,12 +21,12 @@ const Products = () => {
           <div className={scss.products}>
             {filteredProducts.map((item) => (
               <div key={item._id} className={scss.card}>
-                <img src={item.image} alt={item.name} />
+                <img onClick={() => navigate(`/details/${item._id}`)} src={item.image} alt={item.name} />
                 <h3>{item.name}</h3>
                 <p>{item.price} сом</p>
                <div className={scss.btns}>
                  <button onClick={() => navigate(`/update/${item._id}`)}>update</button>
-                <button onClick={() => deleteProduct(item._id)}>delete</button>
+                <button style={{background:'red'}} onClick={() => deleteProduct(item._id)}>delete</button>
                </div>
               </div>
             ))}

@@ -13,12 +13,12 @@ const UpdatePage = () => {
   const onSubmit = async (data) => {
     await updateProduct(id, data);
     navigate("/");
-    console.log(data);
+    // console.log(data);
   };
 
   useEffect(() => {
     getOneProduct(id);
-  }, [id, getOneProduct]);
+  }, [id]);
 
   useEffect(() => {
     if (oneProduct && Object.keys(oneProduct).length > 0) {
