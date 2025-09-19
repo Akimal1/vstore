@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import Home from "../pages/home/Home";
 import Admin from "../pages/admin/Admin";
 import Register from "../pages/register/Register";
@@ -9,7 +9,7 @@ import Details from "../pages/details/Details";
 const MainRoutes = () => {
   const routes = [
     { link: "/", element: <Home /> },
-    { link: "*", element: "" },
+    { link: "*", element: <Navigate to="/" replace /> },
     { link: "/admin", element: <Admin /> },
     { link: "/register", element: <Register /> },
     { link: "/update/:id", element: <UpdatePage /> },
