@@ -26,7 +26,7 @@
       cursor: pointer;
       transition: 0.2s;
       &:hover {
-        color: #e6007e; 
+        color: #e6007e;
       }
     }
   }
@@ -40,6 +40,35 @@
       transition: 0.2s;
       &:hover {
         color: #e6007e;
+      }
+    }
+    .userInfo {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 10px;
+      border-radius: 7px;
+      img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: 0.2s;
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+
+      .userTitle {
+        display: flex;
+        align-items: start;
+        flex-direction: column;
+        gap: 4px;
+       
+      }
+      &:hover {
+        background: grey;
+       
       }
     }
   }
@@ -65,7 +94,7 @@
       margin: 0 20px;
       padding: 20px;
       padding-left: 40px;
-    
+
       border: 1px solid #444;
       border-radius: 25px;
       background: #111;
@@ -75,7 +104,7 @@
       &::placeholder {
         color: #aaa;
       }
-      .search{
+      .search {
         position: absolute;
         top: 0;
         right: 0;
@@ -97,35 +126,32 @@
         color: #e6007e;
       }
     }
-    
   }
 }
 .searchWrapper {
-    position: relative;
-    width: 100%;
-    max-width: 400px;
-  
-  
-  
-    .leftIcon {
-      position: absolute;
-      left: 30px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #888;
-      font-size: 18px;
-    }
-  
-    .rightIcon {
-      position: absolute;
-      right: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #888;
-      font-size: 18px;
-      cursor: pointer;
-      &:hover {
-        color: #e6007e; 
-      }
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+
+  .leftIcon {
+    position: absolute;
+    left: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+    font-size: 18px;
+  }
+
+  .rightIcon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+    font-size: 18px;
+    cursor: pointer;
+    &:hover {
+      color: #e6007e;
     }
   }
+}
