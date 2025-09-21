@@ -62,9 +62,9 @@ const ProductContext = ({ children }) => {
   const updateProduct = async (id, updatedProduct) => {
     try {
       await axios.patch(`${API}/${id}`, updatedProduct);
-    //   await getOneProduct(id)
-    //   await getProducts()
-    getProducts()
+      //   await getOneProduct(id)
+      //   await getProducts()
+      getProducts();
     } catch (error) {
       console.log(error.message);
     }
@@ -77,8 +77,7 @@ const ProductContext = ({ children }) => {
         payload: data,
       });
     } catch (error) {
-        console.log(error.message);
-        
+      console.log(error.message);
     }
   };
 
@@ -91,7 +90,7 @@ const ProductContext = ({ children }) => {
     deleteProduct,
     updateProduct,
     getOneProduct,
-    oneProduct: state.oneProduct
+    oneProduct: state.oneProduct,
   };
   return (
     <productContext.Provider value={values}>{children}</productContext.Provider>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import scss from "./header.module.scss";
 import { IoCartOutline } from "react-icons/io5";
 import { CiSearch } from "react-icons/ci";
@@ -8,7 +8,8 @@ import { useAuthContext } from "../../../context/AuthContext";
 
 const Header = () => {
   const navigate = useNavigate();
-  const { user } = useAuthContext();
+  const [isModal, setIsModal] = useState(false);
+  const { user, logOut, delteteAccount } = useAuthContext();
   console.log(user);
   return (
     <section className={scss.container}>
@@ -26,18 +27,42 @@ const Header = () => {
             <div className={scss.headerRight}>
               {!user && (
                 <>
-                  <p>Вход</p>
+                  <p onClick={() => navigate("/login")}>Вход</p>
                   <p onClick={() => navigate("/register")}>Регистрация</p>
                 </>
               )}
 
               {user && (
-                <div className={scss.userInfo}>
+                <div
+                  onClick={() => setIsModal(!isModal)}
+                  className={scss.userInfo}
+                >
                   <img src={user?.photoURL} alt="" />
                   <div className={scss.userTitle}>
                     <p>{user?.displayName}</p>
                     <p>{user?.email}</p>
                   </div>
+                </div>
+              )}
+              {isModal && (
+                <div className={scss.modal}>
+                  <p
+                    onClick={() => {
+                      logOut();
+                      setIsModal(false);
+                    }}
+                  >
+                    Log Out
+                  </p>
+                  <p
+                    onClick={() => {
+                      delteteAccount();
+                      setIsModal(false);
+                    }}
+                  >
+                    {" "}
+                    Delete Account
+                  </p>
                 </div>
               )}
             </div>

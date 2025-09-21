@@ -34,6 +34,7 @@
   .headerRight {
     display: flex;
     gap: 20px;
+    position: relative;
 
     p {
       cursor: pointer;
@@ -64,11 +65,38 @@
         align-items: start;
         flex-direction: column;
         gap: 4px;
-       
       }
       &:hover {
         background: grey;
-       
+      }
+    }
+    .modal {
+      position: absolute;
+      left: 70px;
+      top: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      width: 200px;
+      height: 80px;
+      padding: 10px;
+      background-color: grey;
+      p {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        padding: 7px;
+        cursor: pointer;
+        transition: 0.2s;
+        width: 100%;
+        &:hover {
+          background: #fff;
+          color: black;
+        }
+      }
+      p:last-child {
+        color: red;
       }
     }
   }

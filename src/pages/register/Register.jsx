@@ -25,7 +25,7 @@ const Register = () => {
       );
       reset();
       alert("Аккаунт успешно создан!");
-      navigate("/"); // После регистрации редирект на главную
+      navigate("/"); 
     } catch (error) {
       alert("Ошибка при регистрации: " + error.message);
     }
