@@ -5,13 +5,12 @@ import { API } from "../constants/api";
 const productContext = createContext();
 export const useProductContext = () => useContext(productContext);
 
-
-
 const initialState = {
   products: [],
   oneProduct: {},
   isLoading: false,
   category: "",
+  basket: JSON.parse(localStorage.getItem("basket")) || [],
 };
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -21,6 +20,20 @@ const reducer = (state = initialState, action) => {
       return { ...state, oneProduct: action.payload };
     case "SET_CATEGORY":
       return { ...state, category: action.payload };
+
+    case "ADD_TO_BASKET":
+      return { ...state, basket: [...state.basket, action.payload] };
+
+    case "REMOVE_FROM_BASKET":
+      const index = state.basket.findIndex(
+        (item) => item.id === action.payload
+      );
+      if (index >= 0) {
+        const newBasket = [...state.basket];
+        newBasket.splice(index, 1);
+        return { ...state, basket: newBasket };
+      }
+      return state;
     default:
       return state;
   }
@@ -95,6 +108,13 @@ const ProductContext = ({ children }) => {
       console.log(error.message);
     }
   };
+  const addToBasket = (product) => {
+    dispatch({ type: "ADD_TO_BASKET", payload: product });
+  };
+
+  const removeFromBasket = (id) => {
+    dispatch({ type: "REMOVE_FROM_BASKET", payload: id });
+  };
 
   const values = {
     postProduct,
@@ -107,6 +127,9 @@ const ProductContext = ({ children }) => {
     getOneProduct,
     oneProduct: state.oneProduct,
     searchPhone,
+    addToBasket,
+    removeFromBasket,
+    basket: state.basket,
   };
   return (
     <productContext.Provider value={values}>{children}</productContext.Provider>

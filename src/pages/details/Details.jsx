@@ -4,7 +4,7 @@ import { useProductContext } from "../../context/ProductContext";
 import { useNavigate, useParams } from "react-router-dom";
 const Details = () => {
   const navigate = useNavigate();
-  const { getOneProduct, oneProduct } = useProductContext();
+  const { getOneProduct, oneProduct, addToBasket } = useProductContext();
   const { id } = useParams();
 
   useEffect(() => {
@@ -13,7 +13,12 @@ const Details = () => {
 
   return (
     <section className={scss.container}>
-      <button onClick={() => navigate('/')} style={{ background: "blue", color: "white" }}>Назад</button>
+      <button
+        onClick={() => navigate("/")}
+        style={{ background: "blue", color: "white" }}
+      >
+        Назад
+      </button>
       <div className="container">
         <div className={scss.mainContainer}>
           <h3>{oneProduct.name}</h3>
@@ -39,7 +44,14 @@ const Details = () => {
                 Операционная система: <span>{oneProduct.system}</span>
               </p>
               <div className={scss.btns}>
-                <button>Заказать</button>
+                <button
+                  onClick={() => {
+                    addToBasket(oneProduct);
+                    navigate("/basket");
+                  }}
+                >
+                  Заказать
+                </button>
                 <button style={{ background: "red" }}>В избранное</button>
               </div>
             </div>

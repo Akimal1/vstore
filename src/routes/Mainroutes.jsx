@@ -11,6 +11,7 @@ import Warranty from "../pages/warranty/Warranty";
 import Delivery from "../pages/delivery/Delivery";
 import Contacts from "../pages/contacts/Contacts";
 import Products from "../pages/products/Products";
+import Basket from "../pages/bascet/Basket";
 
 const MainRoutes = () => {
   const routes = [
@@ -26,6 +27,7 @@ const MainRoutes = () => {
     { link: "/delivery", element: <Delivery /> },
     { link: "/contacts", element: <Contacts /> },
     { link: "/products", element: <Products /> },
+    { link: "/basket", element: <Basket /> },
   ];
   return (
     <Routes>

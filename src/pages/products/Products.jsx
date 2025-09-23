@@ -30,8 +30,13 @@ const Products = () => {
                   src={item.image}
                   alt={item.name}
                 />
+                <div className={scss.textBtns}>
                 <h3>{item.name}</h3>
                 <p>{item.price} сом</p>
+
+                </div>
+               
+
                 {user?.role && (
                   <div className={scss.btns}>
                     <button onClick={() => navigate(`/update/${item._id}`)}>
