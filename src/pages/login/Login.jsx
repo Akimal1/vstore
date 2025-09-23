@@ -26,7 +26,6 @@ const Login = () => {
   
   const onSubmit = async (data) => {
     
-    console.log(data);
     try {
       await login(data.email, data.password);
       toast.success("Успешный вход!");
