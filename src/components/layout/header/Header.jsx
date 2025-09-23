@@ -48,6 +48,12 @@ const Header = () => {
                 >
                   <img src={user?.photoURL} alt="" />
                   <div className={scss.userTitle}>
+                    {user?.role === "admin" ? (
+                      <span>Admin</span>
+                    ) : (
+                      <span>User</span>
+                    )}
+
                     <p>{user?.displayName}</p>
                     <p>{user?.email}</p>
                   </div>
