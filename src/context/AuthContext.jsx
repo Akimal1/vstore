@@ -9,8 +9,8 @@ import {
   deleteUser,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { auth } from "../firebase";
-import { setDoc } from "firebase/firestore";
+import { auth, db } from "../firebase";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 const authContext = createContext();
 export const useAuthContext = () => useContext(authContext);
@@ -28,6 +28,7 @@ const reducer = (state, action) => {
 
 const AuthContext = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const googleProvider = new GoogleAuthProvider();
 
   const createAccount = async (
     email,
@@ -67,10 +68,7 @@ const AuthContext = ({ children }) => {
         photoURL: user.photoURL || "",
         phoneNumber: phone || "",
         surName: surName || "",
-        role:
-          email === "akimturgunbaewv@gmail.com" && password === "akimali@+$3689"
-            ? "admin"
-            : "user",
+        role: email === "akimturgunbaewv@gmail.com" ? "admin" : "user",
       });
     } catch (error) {
       console.error("Ошибка при создании аккаунта:", error.message);
@@ -79,23 +77,7 @@ const AuthContext = ({ children }) => {
   };
 
   const signInWithGoogle = async () => {
-    try {
-      const provider = new GoogleAuthProvider();
-      const { user } = await signInWithPopup(auth, provider);
-
-      dispatch({
-        type: "SET_USER",
-        payload: {
-          uid: user.uid,
-          email: user.email,
-          displayName: user.displayName,
-          photoURL: user.photoURL,
-          phoneNumber: user.phoneNumber || "",
-        },
-      });
-    } catch (error) {
-      console.error("Ошибка Google входа:", error.message);
-    }
+    await signInWithPopup(auth, googleProvider);
   };
 
   const logOut = async () => {
@@ -113,20 +95,19 @@ const AuthContext = ({ children }) => {
   };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
       if (firebaseUser) {
+        const userDb = await getDoc(doc(db, "user-roles", firebaseUser.uid));
+        const totalUser = { ...firebaseUser, ...userDb.data() };
         dispatch({
           type: "SET_USER",
-          payload: {
-            uid: firebaseUser.uid,
-            email: firebaseUser.email,
-            displayName: firebaseUser.displayName,
-            photoURL: firebaseUser.photoURL,
-            phoneNumber: firebaseUser.phoneNumber || "",
-          },
+          payload: totalUser,
         });
       } else {
-        dispatch({ type: "SET_USER", payload: null });
+        dispatch({
+          type: "SET_USER",
+          payload: null,
+        });
       }
     });
 

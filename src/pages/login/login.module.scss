@@ -3,6 +3,28 @@
 
   font-family: Arial, sans-serif;
   color: #000;
+  .loginForm {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  
+    label {
+      font-size: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+  
+    input[type="email"],
+    input[type="password"] {
+      padding: 12px;
+      border: none;
+      background: #f2f2f2;
+      border-radius: 4px;
+      font-size: 14px;
+      width: 600px;
+    }
+  }
 }
 
 .tabs {
@@ -27,28 +49,7 @@
   }
 }
 
-.loginForm {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
 
-  label {
-    font-size: 14px;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-  }
-
-  input[type="text"],
-  input[type="password"] {
-    padding: 12px;
-    border: none;
-    background: #f2f2f2;
-    border-radius: 4px;
-    font-size: 14px;
-    width: 600px;
-  }
-}
 
 .rememberBlock {
   display: flex;

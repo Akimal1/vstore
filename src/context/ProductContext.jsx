@@ -5,6 +5,8 @@ import { API } from "../constants/api";
 const productContext = createContext();
 export const useProductContext = () => useContext(productContext);
 
+
+
 const initialState = {
   products: [],
   oneProduct: {},
@@ -80,6 +82,19 @@ const ProductContext = ({ children }) => {
       console.log(error.message);
     }
   };
+  const searchPhone = async (value) => {
+    try {
+      let { data } = await axios.get(
+        `${API}?searchKey=name&searchValue=${value}`
+      );
+      dispatch({
+        type: "GET",
+        payload: data.data,
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   const values = {
     postProduct,
@@ -91,6 +106,7 @@ const ProductContext = ({ children }) => {
     updateProduct,
     getOneProduct,
     oneProduct: state.oneProduct,
+    searchPhone,
   };
   return (
     <productContext.Provider value={values}>{children}</productContext.Provider>

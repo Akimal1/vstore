@@ -7,25 +7,46 @@ import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../../firebase";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useForm } from "react-hook-form";
 
 const Login = () => {
   const { signInWithGoogle, login } = useAuthContext();
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
 
   const [isForgotOpen, setIsForgotOpen] = useState(false);
   const [resetEmail, setResetEmail] = useState("");
+  
+  
+  const onSubmit = async (data) => {
+    
+    console.log(data);
+    try {
+      await login(data.email, data.password);
+      toast.success("Успешный вход!");
+      reset(); 
+    } catch (error) {
+      toast.error("Ошибка: " + error.message);
+    }
+  };
 
   const handleResetPassword = async () => {
+    if (!resetEmail) {
+      toast.error("Введите email для восстановления");
+      return;
+    }
     try {
       await sendPasswordResetEmail(auth, resetEmail);
       toast.success(`Ссылка для сброса пароля отправлена на ${resetEmail}`);
       setIsForgotOpen(false);
       setResetEmail("");
     } catch (error) {
-      console.error("Ошибка при сбросе пароля:", error.message);
       toast.error("Ошибка: " + error.message);
     }
   };
@@ -42,37 +63,31 @@ const Login = () => {
           <span onClick={() => navigate("/register")}>ЗАРЕГИСТРИРОВАТЬСЯ</span>
         </div>
 
-        <form
-          className={scss.loginForm}
-          onSubmit={(e) => {
-            e.preventDefault();
-            login(email, password);
-          }}
-        >
+        <form className={scss.loginForm} onSubmit={handleSubmit(onSubmit)}>
           <label>
             Email*
             <input
-              onChange={(e) => setEmail(e.target.value)}
-              type="text"
+              type="email"
               placeholder="Введите email"
-              value={email}
+              {...register("email", { required: "Введите email" })}
             />
+            {errors.email && <p className={scss.error}>{errors.email.message}</p>}
           </label>
+
           <label>
             Пароль*
             <input
-              onChange={(e) => setPassword(e.target.value)}
               type="password"
               placeholder="Введите пароль"
-              value={password}
+              {...register("password", { required: "Введите пароль" })}
             />
+            {errors.password && (
+              <p className={scss.error}>{errors.password.message}</p>
+            )}
           </label>
 
           <div className={scss.actions}>
-            <button
-              onClick={() => login(email, password)}
-              className={scss.loginBtn}
-            >
+            <button type="submit" className={scss.loginBtn}>
               Войти
             </button>
             <a

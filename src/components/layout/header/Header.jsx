@@ -1,16 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import scss from "./header.module.scss";
 import { IoCartOutline } from "react-icons/io5";
 import { CiSearch } from "react-icons/ci";
 import { FaArrowRight } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../../context/AuthContext";
+import { useProductContext } from "../../../context/ProductContext";
 
 const Header = () => {
   const navigate = useNavigate();
   const [isModal, setIsModal] = useState(false);
   const { user, logOut, delteteAccount } = useAuthContext();
-  console.log(user);
+  const { searchPhone } = useProductContext();
+
+  const [value, setValue] = useState("");
+
+  const handleChange = (e) => {
+    const val = e.target.value;
+    setValue(val);
+    searchPhone(val);
+  };
+
   return (
     <section className={scss.container}>
       <div className={scss.container}>
@@ -18,11 +28,10 @@ const Header = () => {
           <div className={scss.headerTop}>
             <div className={scss.headerLeft}>
               <p onClick={() => navigate("/")}>Главная</p>
-              <p>О магазине</p>
-              <p>Гарантия</p>
-              <p>Доставка</p>
-              <p>Кредит</p>
-              <p>Контакты</p>
+              <p onClick={() => navigate("/about")}>О магазине</p>
+              <p onClick={() => navigate("/warranty")}>Гарантия</p>
+              <p onClick={() => navigate("delivery")}>Доставка</p>
+              <p onClick={() => navigate("contacts")}>Контакты</p>
             </div>
             <div className={scss.headerRight}>
               {!user && (
@@ -73,11 +82,18 @@ const Header = () => {
             </h1>
             <div className={scss.searchWrapper}>
               <CiSearch className={scss.leftIcon} />
-              <input type="text" placeholder="Поиск по каталогу магазина" />
+              <input
+                onChange={handleChange}
+                type="text"
+                placeholder="Поиск по каталогу магазина"
+              />
               <FaArrowRight className={scss.rightIcon} />
             </div>
 
-            <span className={scss.cart}>
+            <span
+              onClick={() => setSearchValue(e.target.value)}
+              className={scss.cart}
+            >
               <IoCartOutline />
             </span>
           </div>

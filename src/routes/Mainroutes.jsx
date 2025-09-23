@@ -6,6 +6,11 @@ import Register from "../pages/register/Register";
 import UpdatePage from "../pages/update/UpdatePage";
 import Details from "../pages/details/Details";
 import Login from "../pages/login/Login";
+import About from "../pages/about/About";
+import Warranty from "../pages/warranty/Warranty";
+import Delivery from "../pages/delivery/Delivery";
+import Contacts from "../pages/contacts/Contacts";
+import Products from "../pages/products/Products";
 
 const MainRoutes = () => {
   const routes = [
@@ -16,6 +21,11 @@ const MainRoutes = () => {
     { link: "/update/:id", element: <UpdatePage /> },
     { link: "/details/:id", element: <Details /> },
     { link: "/login", element: <Login /> },
+    { link: "/about", element: <About /> },
+    { link: "/warranty", element: <Warranty /> },
+    { link: "/delivery", element: <Delivery /> },
+    { link: "/contacts", element: <Contacts /> },
+    { link: "/products", element: <Products /> },
   ];
   return (
     <Routes>

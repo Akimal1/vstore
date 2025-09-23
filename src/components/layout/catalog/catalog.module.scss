@@ -1,0 +1,121 @@
+.container {
+  position: sticky;
+  top: 0;
+  z-index: 999999;
+  
+  .mainContainer {
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    margin-top: 18px;
+
+    .phones {
+      width: 100%;
+      padding: 20px;
+      border-radius: 5px;
+      border: 1px solid rgba(0, 0, 0, 0.375);
+      background: white;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      gap: 10px;
+      h4 {
+        width: 300px;
+        padding: 10px;
+        height: 50px;
+        background: #e6007e;
+      }
+      hr {
+        border: none;
+        height: 1px;
+        background-color: rgba(0, 0, 0, 0.177);
+        width: 300px;
+      }
+      .phoneCard {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        gap: 10px;
+        width: 300px;
+        height: 452px;
+        p {
+          color: black;
+        }
+      }
+    }
+  }
+}
+.filterCard {
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  .cardPrice {
+    background: #f8f8f8;
+    border-radius: 5px;
+    padding: 10px;
+    p {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      font-weight: bold;
+      color: black;
+      span {
+        font-size: 18px;
+        color: #e6007e;
+      }
+    }
+
+    .priceSlider {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      gap: 20px;
+      width: 100%;
+
+      input[type="range"] {
+        width: 100%;
+        height: 10px;
+        border-radius: 5px;
+        background: #ddd;
+        outline: none;
+        cursor: pointer;
+
+        &::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          width: 30px;
+          height: 30px;
+          background: #e6007e;
+          border-radius: 50%;
+          cursor: pointer;
+        }
+
+        &::-moz-range-thumb {
+          width: 30px;
+          height: 30px;
+          background: #e6007e;
+          border-radius: 50%;
+          cursor: pointer;
+        }
+      }
+
+      p {
+        color: black;
+        margin: 5px 0;
+        font-weight: bold;
+        text-align: center;
+      }
+
+      .priceLimits {
+        display: flex;
+        justify-content: space-between;
+        font-size: 14px;
+        color: #555;
+      }
+    }
+  }
+}

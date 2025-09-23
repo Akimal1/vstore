@@ -1,11 +1,15 @@
 import React, { useEffect } from "react";
 import scss from "./products.module.scss";
 import { useProductContext } from "../../context/ProductContext";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../../context/AuthContext";
 
 const Products = () => {
-  const { products, getProducts, category,deleteProduct } = useProductContext();
-  const navigate = useNavigate()
+  const { products, getProducts, category, deleteProduct, searchPhone } =
+    useProductContext();
+
+  const { user } = useAuthContext();
+  const navigate = useNavigate();
   useEffect(() => {
     getProducts();
   }, []);
@@ -21,13 +25,26 @@ const Products = () => {
           <div className={scss.products}>
             {filteredProducts.map((item) => (
               <div key={item._id} className={scss.card}>
-                <img onClick={() => navigate(`/details/${item._id}`)} src={item.image} alt={item.name} />
+                <img
+                  onClick={() => navigate(`/details/${item._id}`)}
+                  src={item.image}
+                  alt={item.name}
+                />
                 <h3>{item.name}</h3>
                 <p>{item.price} сом</p>
-               <div className={scss.btns}>
-                 <button onClick={() => navigate(`/update/${item._id}`)}>update</button>
-                <button style={{background:'red'}} onClick={() => deleteProduct(item._id)}>delete</button>
-               </div>
+                {user?.role && (
+                  <div className={scss.btns}>
+                    <button onClick={() => navigate(`/update/${item._id}`)}>
+                      update
+                    </button>
+                    <button
+                      style={{ background: "red" }}
+                      onClick={() => deleteProduct(item._id)}
+                    >
+                      delete
+                    </button>
+                  </div>
+                )}
               </div>
             ))}
           </div>
